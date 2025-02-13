@@ -46,7 +46,7 @@ steps:
     args: ['gcloud', 'run', 'deploy', 'helloworld-${SHORT_SHA}', 
            '--image=us-east1-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/myimage:${SHORT_SHA}', 
            '--region', 'us-east1', '--platform', 'managed', 
-           '--service-account', '${SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com'
+           '--service-account', '${_SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com'
            # '--allow-unauthenticated'
            ]
   # [END cloudbuild_python_deploy_yaml]
@@ -67,4 +67,5 @@ images:
 # See README.md -- had to first make an AR repo and set it here for this variable to have a valid value
 substitutions: 
   _ARTIFACT_REGISTRY_REPO: "cloud-build-test-repo"
-  SERVICE_ACCOUNT: cloud-build-service-account
+  _SERVICE_ACCOUNT: cloud-build-service-account
+  _BUCKET_NAME: "cloud-build-test-bucket-wck"
