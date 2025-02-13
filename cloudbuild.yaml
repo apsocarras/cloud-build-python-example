@@ -40,28 +40,15 @@ steps:
     args: ['push',  'us-east1-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/myimage:${SHORT_SHA}']
   # [END cloudbuild_python_push_yaml]
   
-    # [START cloudbuild_python_deploy_yaml]
-    # Add IAM Policy Binding 
-    # This enables the service to be invokeable for all users.
-    # You could also create a specific service account for invoking Cloud Run services.
-  - name: google/cloud-sdk
-    args: ['gcloud', 'run', 'services', 'add-iam-policy-binding',
-           '--region=us-east1',
-           '--member=allUsers',
-           '--role=roles/run.invoker',
-           'helloworld-${SHORT_SHA}',
-      ]
-  # [END cloudbuild_python_deploy_yaml]
-
-
-
   # [START cloudbuild_python_deploy_yaml]
   # Deploy to Cloud Run
   - name: google/cloud-sdk
     args: ['gcloud', 'run', 'deploy', 'helloworld-${SHORT_SHA}', 
            '--image=us-east1-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/myimage:${SHORT_SHA}', 
            '--region', 'us-east1', '--platform', 'managed', 
-           '--allow-unauthenticated']
+           '--service-account', '${SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com'
+           # '--allow-unauthenticated'
+           ]
   # [END cloudbuild_python_deploy_yaml]
   
 # [START cloudbuild_python_logs_yaml]
@@ -80,3 +67,4 @@ images:
 # See README.md -- had to first make an AR repo and set it here for this variable to have a valid value
 substitutions: 
   _ARTIFACT_REGISTRY_REPO: "cloud-build-test-repo"
+  SERVICE_ACCOUNT: cloud-run-invoker
