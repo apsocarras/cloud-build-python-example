@@ -23,6 +23,9 @@ substitutions:
 
 Make sure all the references to this repo in the cloudbuild.yaml point to the correct region/full resource path. 
 
+#### Service Account 
+
+Create a service account with cloud run service permissions and include it in the cloudbuild.yaml
 
 
 Here's a command to test the build locally with the Dockerfile 
