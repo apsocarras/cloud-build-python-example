@@ -48,6 +48,18 @@ steps:
            '--region', 'us-east1', '--platform', 'managed', 
            '--allow-unauthenticated']
   # [END cloudbuild_python_deploy_yaml]
+
+  # Add IAM Policy Binding 
+    # This enables the service to be invokeable for all users.
+    # You could also create a specific service account for invoking Cloud Run services.
+  - name: google/cloud-sdk
+    args: ['gcloud', 'run', 'services', 'add-iam-policy-binding',
+           '--region=us-east1',
+           '--member=allUsers',
+           '--role=roles/run.invoker',
+           'helloworld-${SHORT_SHA}',
+      ]
+
   
 # [START cloudbuild_python_logs_yaml]
 # Save test logs to Google Cloud Storage
