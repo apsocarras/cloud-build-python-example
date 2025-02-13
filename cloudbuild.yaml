@@ -64,4 +64,4 @@ images:
 
 # See README.md -- had to first make an AR repo and set it here for this variable to have a valid value
 substitutions: 
-  _ARTIFACT_REGISTRY_REPO: "cloud-build-test-repo"
+  _ARTIFACT_REGISTRY_REPO: "us-east1-docker.pkg.dev/wck-source/cloud-build-test-repo"
