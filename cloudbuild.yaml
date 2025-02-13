@@ -67,4 +67,4 @@ images:
 # See README.md -- had to first make an AR repo and set it here for this variable to have a valid value
 substitutions: 
   _ARTIFACT_REGISTRY_REPO: "cloud-build-test-repo"
-  SERVICE_ACCOUNT: cloud-run-invoker
+  SERVICE_ACCOUNT: cloud-build-service-account
